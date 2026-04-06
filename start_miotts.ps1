@@ -254,7 +254,7 @@ if (Test-PortOpen $MIOTTS_API_PORT) {
     Write-Skip "MioTTS API already running on port $MIOTTS_API_PORT"
 } else {
     Write-Host "    Starting MioTTS API server..." -ForegroundColor White
-    $apiCmd = "cd '$ScriptDir'; uv run python run_server.py --llm-base-url $LLM_BASE_URL"
+    $apiCmd = "cd '$ScriptDir'; uv run python run_server.py --llm-base-url $LLM_BASE_URL --max-text-length 2000 --max-reference-mb 100"
     Write-Log "INFO" "Launching MioTTS API: $apiCmd"
     $proc = Start-Process powershell -ArgumentList "-NoExit", "-Command", $apiCmd -WindowStyle Normal -PassThru
     $script:spawnedProcesses.Add($proc)
